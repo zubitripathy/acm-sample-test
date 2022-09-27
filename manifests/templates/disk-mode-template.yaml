@@ -1,0 +1,19 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: k8sdisksinreadonly
+  annotations:
+    description: Ensures that all Disks are attached in Read-only mode on vm
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sDisksInReadonly
+      validation:
+        # Schema for the `parameters` field
+        openAPIV3Schema:
+          type: object
+          properties:
+            readOnly:
+              description: ReadOnly specifies the read/write capability enforced.
+              type: boolean
