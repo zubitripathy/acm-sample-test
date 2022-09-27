@@ -17,3 +17,16 @@ spec:
             readOnly:
               description: ReadOnly specifies the read/write capability enforced.
               type: boolean
+
+  targets:
+  - rego: |
+      package k8sdisksinreadonly
+
+      violation[{"msg": msg}] {
+          readOnly := input.review.object.spec.disks.items.readOnly
+          readOnlyVal := input.parameters.readOnly
+          readOnly != readOnlyVal
+          msg := sprintf("Disks of readOnly value %v not allowed", [readOnlyVal])
+      }
+
+    target: admission.k8s.gatekeeper.sh
