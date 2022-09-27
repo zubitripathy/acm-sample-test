@@ -1,0 +1,17 @@
+apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachine
+metadata:
+  name: my-kube-vm
+  namespace: default
+  labels:
+    special: key-kubevm
+spec:
+  osType: Linux
+  compute:
+    cpu:
+      vcpus: 3
+    memory:
+      capacity: 2G
+  disks:
+    items:
+      readOnly: false
