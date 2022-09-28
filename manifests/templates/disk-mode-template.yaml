@@ -19,14 +19,13 @@ spec:
               type: boolean
 
   targets:
-  - rego: |
-      package k8sdisksinreadonly
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8sdisksinreadonly
 
-      violation[{"msg": msg}] {
-          readOnly := input.review.object.spec.disks.readOnly
-          readOnlyVal := input.parameters.readOnly
-          readOnly != readOnlyVal
-          msg := sprintf("Disks of readOnly value %v not allowed", [readOnly])
-      }
-
-    target: admission.k8s.gatekeeper.sh
+        violation[{"msg": msg}] {
+            readOnly := input.review.object.spec.disks.readOnly
+            readOnlyVal := input.parameters.readOnly
+            readOnly != readOnlyVal
+            msg := sprintf("Disks of readOnly value %v not allowed", [readOnly])
+        }
