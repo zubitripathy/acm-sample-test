@@ -28,6 +28,6 @@ spec:
       capacity: 8Gi
   disks:
     items:
-      readOnly: true
-      virtualMachineDiskName: disk-registry-zubi-4
-      boot: true
+      - readOnly: true
+      - virtualMachineDiskName: disk-registry-zubi-4
+      - boot: true
