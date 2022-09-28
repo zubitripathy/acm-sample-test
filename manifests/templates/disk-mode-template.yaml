@@ -24,7 +24,7 @@ spec:
         package k8sdisksinreadonly
 
         violation[{"msg": msg}] {
-            readOnlyRes := input.review.object.spec.disks[].readOnly
+            readOnlyRes := input.review.object.spec.disks[_].readOnly
             readOnlyCons := input.parameters.readOnly
             readOnlyRes != readOnlyCons
             msg := sprintf("Disks of readOnly value %v not allowed", [readOnlyRes])
