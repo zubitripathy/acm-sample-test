@@ -10,9 +10,20 @@ spec:
   storageClassName: local-shared
 ---
 apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachineDisk
+metadata:
+  name: disk-registry-zubi-5
+spec:
+  source:
+    registry:
+      url: "docker://kubevirt/fedora-cloud-container-disk-demo"
+  size: 8Gi
+  storageClassName: local-shared
+---
+apiVersion: vm.cluster.gke.io/v1
 kind: VirtualMachine
 metadata:
-  name: my-kube-vm-zubi-test3
+  name: my-kube-vm-zubi-test5
   namespace: default
   labels:
     special: key-kubevm
@@ -28,5 +39,8 @@ spec:
       capacity: 8Gi
   disks:
   - virtualMachineDiskName: disk-registry-zubi-4
+    boot: true
+    readOnly: true
+  - virtualMachineDiskName: disk-registry-zubi-5
     boot: true
     readOnly: true
