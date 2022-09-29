@@ -28,5 +28,5 @@ spec:
       capacity: 6Gi
   disks:
   - virtualMachineDiskName: disk-registry-zubi-3
-    boot: true
-    readOnly: false
+    boot: false
+    readOnly: true
