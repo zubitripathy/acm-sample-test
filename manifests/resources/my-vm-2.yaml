@@ -1,7 +1,7 @@
 apiVersion: vm.cluster.gke.io/v1
 kind: VirtualMachineDisk
 metadata:
-  name: disk-registry-zubi-2
+  name: disk-registry-zubi-3
 spec:
   source:
     registry:
@@ -27,6 +27,6 @@ spec:
     memory:
       capacity: 6Gi
   disks:
-  - virtualMachineDiskName: disk-registry-zubi-2
+  - virtualMachineDiskName: disk-registry-zubi-3
     boot: true
     readOnly: false
