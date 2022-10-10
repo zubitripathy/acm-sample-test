@@ -25,8 +25,9 @@ spec:
 
         violation[{"msg": msg}] {
             input.review.kind.kind == "VirtualMachine"
-            numofdisks := max(input.review.object.spec.disks)
+            numofdisks := 0
             diskwriteval := input.parameters.diskwritenum
-            numofdisks <= diskwriteval if { !input.review.object.spec.disks[_].readOnly }
-            msg := sprintf("No. of disks %v of write type not allowed", [numofdisks])
+            numofdisks := numofdisks + 1 if { !input.review.object.spec.disks[_].readOnly }
+            numofdisks > diskwriteval
+            msg := sprintf("No. of disks: %v of write type not allowed", [numofdisks])
         }
