@@ -40,7 +40,7 @@ spec:
   disks:
   - virtualMachineDiskName: disk-registry-zubi-4
     boot: true
-    readOnly: true
+    readOnly: false
   - virtualMachineDiskName: disk-registry-zubi-5
     boot: false
-    readOnly: true
+    readOnly: false
