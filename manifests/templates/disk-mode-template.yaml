@@ -3,7 +3,7 @@ kind: ConstraintTemplate
 metadata:
   name: k8sdisksinwritesingle
   annotations:
-    description: Ensures that all Disks are attached in Read-only mode on vm
+    description: Ensures that maximum 1 disk is allowed to be attached in write mode on VM
 spec:
   crd:
     spec:
@@ -24,8 +24,9 @@ spec:
         package k8sdisksinwritesingle
 
         violation[{"msg": msg}] {
-            readOnlyRes := input.review.object.spec.disks[_].readOnly
-            readOnlyCons := input.parameters.diskwritenum
-            diskwritenum <= 1
-            msg := sprintf("Disks of readOnly value %v not allowed", [readOnlyRes])
+            input.review.kind.kind == "VirtualMachine"
+            numofdisks := max(input.review.object.spec.disks)
+            diskwriteval := input.parameters.diskwritenum
+            numofdisks <= diskwriteval if { !input.review.object.spec.disks[_].readOnly }
+            msg := sprintf("No. of disks %v of write type not allowed", [numofdisks])
         }
