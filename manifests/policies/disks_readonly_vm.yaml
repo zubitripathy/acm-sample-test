@@ -1,11 +1,11 @@
 apiVersion: constraints.gatekeeper.sh/v1beta1
-kind: K8sDisksInReadonly
+kind: K8sDisksInWriteSingle
 metadata:
-  name: require-disks-in-read-only
+  name: require-single-write-disk
 spec:
   match:
     kinds:
       - apiGroups: ["vm.cluster.gke.io"]
         kinds: ["VirtualMachine"]
   parameters:
-    readOnly: true
+    diskwritenum: 1
