@@ -27,7 +27,7 @@ spec:
             input.review.kind.kind == "VirtualMachine"
             numofdisks := 0
             diskwriteval := input.parameters.diskwritenum
-            numofdisks := numofdisks + 1 if { !input.review.object.spec.disks[_].readOnly }
+            numofdisks := numofdisks + 1 if { !input.review.object.spec.disks[_].readOnly };
             numofdisks > diskwriteval
             msg := sprintf("No. of disks: %v of write type not allowed", [numofdisks])
         }
